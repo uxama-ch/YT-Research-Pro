@@ -32,7 +32,7 @@ def check_login():
             st.session_state.logged_in = True
             st.session_state.login_time = time.time()
             st.success("Login successful!")
-            st.experimental_rerun()
+            st.rerun()
             return True
         else:
             st.error("Invalid credentials.")
@@ -41,4 +41,4 @@ def check_login():
 def logout():
     st.session_state.logged_in = False
     st.session_state.login_time = 0
-    st.experimental_rerun()
+    st.rerun()
