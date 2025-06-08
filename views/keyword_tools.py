@@ -1,6 +1,6 @@
 # views/keyword_tools.py
 import streamlit as st
-import openai
+from openai import OpenAI
 import requests
 from config import OPENAI_API_KEY, SERP_API_KEY
 
@@ -12,14 +12,14 @@ def render():
         "Trending Topic Finder by Niche"
     ])
 
-    openai.api_key = OPENAI_API_KEY
+    client = OpenAI(api_key=OPENAI_API_KEY)
 
     if tool == "Keyword Suggestion Tool":
         keyword = st.text_input("Enter a topic:")
         if keyword and st.button("Suggest Keywords"):
             prompt = f"Suggest SEO keywords related to the topic: {keyword}"
-            response = openai.ChatCompletion.create(
-                model="gpt-3.5-turbo",
+            response = client.chat.completions.create(
+                model="gpt-4.1-mini-2025-04-14",
                 messages=[{"role": "user", "content": prompt}]
             )
             st.write(response.choices[0].message.content)
@@ -28,8 +28,8 @@ def render():
         base_keyword = st.text_input("Base Keyword:")
         if base_keyword and st.button("Generate Long-Tail Keywords"):
             prompt = f"Generate long-tail keyword variations for: {base_keyword}"
-            response = openai.ChatCompletion.create(
-                model="gpt-3.5-turbo",
+            response = client.chat.completions.create(
+                model="gpt-4.1-mini-2025-04-14",
                 messages=[{"role": "user", "content": prompt}]
             )
             st.write(response.choices[0].message.content)

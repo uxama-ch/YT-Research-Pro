@@ -1,6 +1,6 @@
 # views/optimization_tools.py
 import streamlit as st
-import openai
+from openai import OpenAI
 from config import OPENAI_API_KEY
 
 def render():
@@ -12,7 +12,7 @@ def render():
         "YouTube Title Analyzer"
     ])
 
-    openai.api_key = OPENAI_API_KEY
+    client = OpenAI(api_key=OPENAI_API_KEY)
 
     input_text = st.text_area("Enter content:")
     if input_text and st.button("Run Tool"):
@@ -25,8 +25,8 @@ def render():
         elif tool == "YouTube Title Analyzer":
             prompt = f"Analyze and rate this YouTube title for SEO and engagement: {input_text}"
 
-        response = openai.ChatCompletion.create(
-            model="gpt-3.5-turbo",
+        response = client.chat.completions.create(
+            model="gpt-4.1-mini-2025-04-14",
             messages=[{"role": "user", "content": prompt}]
         )
         st.write(response.choices[0].message.content)
