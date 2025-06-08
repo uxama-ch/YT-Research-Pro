@@ -7,14 +7,6 @@ import os
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from utils.auth import check_login, logout
-from views.keyword_tools import render as keyword_tools_render
-from views.optimization_tools import render as optimization_tools_render
-from views.planning_tools import render as planning_tools_render
-from views.thumbnail_tools import render as thumbnail_tools_render
-from views.competitor_tools import render as competitor_tools_render
-from views.viral_topics_tool import render as viral_topics_tool_render
-import time
-from config import API_TIMEOUT, MAX_RETRIES
 
 # Set page config
 st.set_page_config(page_title="YouTube Creator Toolkit", layout="wide")
@@ -46,16 +38,22 @@ tool = st.sidebar.radio("Select a tool", [
     "Viral Topics Tool"
 ])
 
-# Render selected tool with error handling
+# Import views dynamically based on selection
 if tool == "Keyword Tools":
-    safe_render(keyword_tools_render)
+    from views.keyword_tools import render
+    safe_render(render)
 elif tool == "Optimization Tools":
-    safe_render(optimization_tools_render)
+    from views.optimization_tools import render
+    safe_render(render)
 elif tool == "Planning & Scripts":
-    safe_render(planning_tools_render)
+    from views.planning_tools import render
+    safe_render(render)
 elif tool == "Thumbnail Tools":
-    safe_render(thumbnail_tools_render)
+    from views.thumbnail_tools import render
+    safe_render(render)
 elif tool == "Competitor Analysis":
-    safe_render(competitor_tools_render)
+    from views.competitor_tools import render
+    safe_render(render)
 elif tool == "Viral Topics Tool":
-    safe_render(viral_topics_tool_render)
+    from views.viral_topics_tool import render
+    safe_render(render)
