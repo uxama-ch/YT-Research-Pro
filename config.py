@@ -1,14 +1,14 @@
 # config.py
-import os
+import streamlit as st
 
 # OpenAI & SERP API Keys
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", "your-openai-api-key")
-SERP_API_KEY = os.getenv("SERP_API_KEY", "your-serpapi-key")
+OPENAI_API_KEY = st.secrets["openai"]["api_key"]
+SERP_API_KEY = st.secrets.get("serp", {}).get("api_key", "")
 
 # App Configurations
 APP_NAME = "YouTube Creator Toolkit"
-OWNER_USERNAME = os.getenv("OWNER_USERNAME", "admin")
-OWNER_PASSWORD = os.getenv("OWNER_PASSWORD", "your_strong_password")
+OWNER_USERNAME = st.secrets["owner"]["username"]
+OWNER_PASSWORD = st.secrets["owner"]["password"]
 
 # Other constants
 DEFAULT_MIN_VIEW_COUNT = 1000

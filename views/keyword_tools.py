@@ -2,7 +2,6 @@
 import streamlit as st
 import openai
 import requests
-import os
 from config import OPENAI_API_KEY, SERP_API_KEY
 
 def render():
@@ -13,8 +12,7 @@ def render():
         "Trending Topic Finder by Niche"
     ])
 
-    openai.api_key = os.getenv("OPENAI_API_KEY")
-    serp_api_key = os.getenv("SERPAPI_API_KEY")
+    openai.api_key = OPENAI_API_KEY
 
     if tool == "Keyword Suggestion Tool":
         keyword = st.text_input("Enter a topic:")
@@ -39,7 +37,7 @@ def render():
     elif tool == "Trending Topic Finder by Niche":
         niche = st.text_input("Enter your niche (e.g. tech, beauty, etc):")
         if niche and st.button("Find Trending Topics"):
-            url = f"https://serpapi.com/search.json?q={niche}+trending&tbm=nws&api_key={serp_api_key}"
+            url = f"https://serpapi.com/search.json?q={niche}+trending&tbm=nws&api_key={SERP_API_KEY}"
             res = requests.get(url).json()
             for article in res.get("news_results", [])[:5]:
                 st.subheader(article.get("title"))

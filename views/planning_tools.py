@@ -1,7 +1,7 @@
 # views/planning_tools.py
 import streamlit as st
 import openai
-import os
+from config import OPENAI_API_KEY
 
 def render():
     st.header("📅 Planning & Scripts")
@@ -11,7 +11,7 @@ def render():
         "Content Gap Analyzer"
     ])
 
-    openai.api_key = os.getenv("OPENAI_API_KEY")
+    openai.api_key = OPENAI_API_KEY
 
     topic = st.text_input("Enter your channel or topic:")
     if topic and st.button("Generate"):

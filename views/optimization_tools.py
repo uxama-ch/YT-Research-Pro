@@ -1,7 +1,7 @@
 # views/optimization_tools.py
 import streamlit as st
 import openai
-import os
+from config import OPENAI_API_KEY
 
 def render():
     st.header("📈 Optimization Tools")
@@ -12,7 +12,7 @@ def render():
         "YouTube Title Analyzer"
     ])
 
-    openai.api_key = os.getenv("OPENAI_API_KEY")
+    openai.api_key = OPENAI_API_KEY
 
     input_text = st.text_area("Enter content:")
     if input_text and st.button("Run Tool"):

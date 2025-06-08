@@ -1,14 +1,13 @@
 # views/viral_topics_tool.py
 import streamlit as st
 import openai
-import os
+from config import OPENAI_API_KEY
 
 def render():
     st.header("🔥 Viral Topics Tool")
     st.write("Use this tool to instantly discover fresh, viral video ideas!")
 
-    # Use Streamlit secrets instead of environment variables
-    openai.api_key = st.secrets["OPENAI_API_KEY"]
+    openai.api_key = OPENAI_API_KEY
 
     if st.button("Start Generating Viral Ideas!"):
         prompt = (

@@ -3,7 +3,7 @@ import streamlit as st
 import pytesseract
 from PIL import Image
 import openai
-import os
+from config import OPENAI_API_KEY
 
 def render():
     st.header("🖼️ Thumbnail Tools")
@@ -12,7 +12,7 @@ def render():
         "Thumbnail Text Extractor"
     ])
 
-    openai.api_key = os.getenv("OPENAI_API_KEY")
+    openai.api_key = OPENAI_API_KEY
 
     if tool == "Thumbnail A/B Tester":
         st.write("Upload two thumbnails to compare")
