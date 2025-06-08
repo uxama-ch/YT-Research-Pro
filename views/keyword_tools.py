@@ -3,6 +3,7 @@ import streamlit as st
 import openai
 import requests
 import os
+from config import OPENAI_API_KEY, SERP_API_KEY
 
 def render():
     st.header("🔑 Keyword Tools")

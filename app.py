@@ -1,14 +1,18 @@
 # app.py
 import streamlit as st
+import sys
+import os
+
+# Add the project root directory to Python path
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 from utils.auth import check_login, logout
-from views import (
-    keyword_tools,
-    optimization_tools,
-    planning_tools,
-    thumbnail_tools,
-    competitor_tools,
-    viral_topics_tool,
-)
+from views.keyword_tools import render as keyword_tools_render
+from views.optimization_tools import render as optimization_tools_render
+from views.planning_tools import render as planning_tools_render
+from views.thumbnail_tools import render as thumbnail_tools_render
+from views.competitor_tools import render as competitor_tools_render
+from views.viral_topics_tool import render as viral_topics_tool_render
 import time
 from config import API_TIMEOUT, MAX_RETRIES
 
@@ -44,14 +48,14 @@ tool = st.sidebar.radio("Select a tool", [
 
 # Render selected tool with error handling
 if tool == "Keyword Tools":
-    safe_render(keyword_tools.render)
+    safe_render(keyword_tools_render)
 elif tool == "Optimization Tools":
-    safe_render(optimization_tools.render)
+    safe_render(optimization_tools_render)
 elif tool == "Planning & Scripts":
-    safe_render(planning_tools.render)
+    safe_render(planning_tools_render)
 elif tool == "Thumbnail Tools":
-    safe_render(thumbnail_tools.render)
+    safe_render(thumbnail_tools_render)
 elif tool == "Competitor Analysis":
-    safe_render(competitor_tools.render)
+    safe_render(competitor_tools_render)
 elif tool == "Viral Topics Tool":
-    safe_render(viral_topics_tool.render)
+    safe_render(viral_topics_tool_render)
